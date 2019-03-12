@@ -13,6 +13,6 @@ public class Repository {
     }
 
     public DataSource getDataSource(Context context) {
-        return new LocalService(context);
+        return new WebService(context);
     }
 }
