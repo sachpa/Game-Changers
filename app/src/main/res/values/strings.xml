@@ -4,6 +4,7 @@
 
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_whats_on_mind">What flashed my mind</string>
+    <string name="contact_info">My spectrum</string>
     <string name="code_name">%1$s my code name is!</string>
     <string name="travels_future">Upto %1$s hours future travel I can</string>
     <string name="travels_past">Upto %1$s hours past time travel I can</string>

@@ -34,7 +34,7 @@ android:background="?attr/selectableItemBackground"
         android:layout_marginEnd="10dp"
         android:text="Name of user"
         android:layout_centerVertical="true"
-        style="@style/UserNameText"
+        style="@style/HeadingText"
         android:layout_toEndOf="@id/user_profile_icon" />
 
     <View

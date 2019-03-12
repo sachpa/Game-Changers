@@ -68,7 +68,6 @@ public class UserListAdapter extends RecyclerView.Adapter {
         final Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(user.getUpdated());
 
-
         Glide.with(rowView.itemView)
                 .asDrawable()
                 .load(user.getProfile().getProfilePictureThumbnail())
