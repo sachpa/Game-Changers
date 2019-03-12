@@ -20,6 +20,7 @@ public class UserListAdapter extends RecyclerView.Adapter {
 
     interface Callback {
         void onSelected(User user);
+        void onScrolledToEnd();
     }
 
     private final Callback callback;
@@ -29,15 +30,21 @@ public class UserListAdapter extends RecyclerView.Adapter {
         this.callback = callback;
     }
 
-    void addUser(User user) {
-        users.add(user);
-        notifyItemInserted(users.size() - 1);
-    }
-
-    void setUsers(List<User> users) {
-        this.users.clear();
-        this.users.addAll(users);
-        notifyDataSetChanged();
+    void setUsers(List<User> newUsers) {
+        // FIXME : Below code is inefficient for large number of users
+        // TODO : Replace with proper pagination support via ViewModel itself
+        for (User user : newUsers) {
+            boolean exists = false;
+            for (User existing : users) {
+                if (user.getId().equalsIgnoreCase(existing.getId())) {
+                    exists = true;
+                }
+            }
+            if (!exists) {
+                users.add(user);
+                notifyItemInserted(users.size());
+            }
+        }
     }
 
     private static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -84,6 +91,9 @@ public class UserListAdapter extends RecyclerView.Adapter {
                 callback.onSelected(user);
             }
         });
+        if (i == getItemCount() - 1) {
+            callback.onScrolledToEnd();
+        }
     }
 
     @Override

@@ -22,6 +22,7 @@ public class UserFragment extends Fragment {
 
     private UserViewModel viewModel;
     private UserListAdapter adapter;
+    private RecyclerView usersListView;
 
     public interface UserSelectedListener {
         void onUserSelected(User user);
@@ -40,12 +41,17 @@ public class UserFragment extends Fragment {
     }
 
     private void createUserList(View rootView) {
-        final RecyclerView usersListView = rootView.findViewById(R.id.users_list_view);
+        usersListView = rootView.findViewById(R.id.users_list_view);
         usersListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         adapter = new UserListAdapter(new UserListAdapter.Callback() {
             @Override
             public void onSelected(User user) {
                 ((UserSelectedListener)getActivity()).onUserSelected(user);
+            }
+
+            @Override
+            public void onScrolledToEnd() {
+                viewModel.onUserListScrolled();
             }
         });
         usersListView.setAdapter(adapter);
@@ -56,7 +62,9 @@ public class UserFragment extends Fragment {
         viewModel.getUsersLiveData().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(@Nullable List<User> users) {
-                adapter.setUsers(users);
+                if (users != null && !users.isEmpty()) {
+                    adapter.setUsers(users);
+                }
             }
         });
     }
