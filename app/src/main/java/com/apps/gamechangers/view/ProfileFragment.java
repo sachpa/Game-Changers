@@ -4,6 +4,7 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,13 @@ public class ProfileFragment extends Fragment {
     }
 
     private void updateTimeTravel(View rootView) {
-        ((TextView)rootView.findViewById(R.id.user_local_time)).setText(getString(R.string.travels_future, "20"));
+        final TextView textView = rootView.findViewById(R.id.user_local_time);
+        if (user.getTimeDifference() == 0) {
+            textView.setText(getString(R.string.travels_present));
+        } else if (user.getTimeDifference() > 0) {
+            textView.setText(getString(R.string.travels_future, "" + user.getTimeDifference()));
+        } else {
+            textView.setText(getString(R.string.travels_past, "" + Math.abs(user.getTimeDifference())));
+        }
     }
 }

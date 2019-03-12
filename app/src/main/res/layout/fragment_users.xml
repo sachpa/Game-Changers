@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/users_heading"
@@ -18,7 +18,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/users_list_view"
-        android:paddingBottom="50dp"
+        android:paddingBottom="150dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@+id/users_heading"/>

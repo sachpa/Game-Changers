@@ -13,6 +13,7 @@ public class User {
     @SerializedName("color")            private String color;
     @SerializedName("profile")          private Profile profile;
     @SerializedName("updated")          private long updated;
+    @SerializedName("tz_offset")          private long timezoneOffset;
 
     public String getId() {
         return id;
@@ -24,6 +25,10 @@ public class User {
 
     public long getUpdated() {
         return updated;
+    }
+
+    public long getTimeDifference() {
+        return timezoneOffset;
     }
 
     public Profile getProfile() {
